@@ -1,0 +1,81 @@
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone_number VARCHAR(20),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    idAdmin boolean DEFAULT FALSE NOT NULL,
+    registration_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE film (
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    duration_minutes INT NOT NULL CHECK (duration_minutes > 0),
+    director VARCHAR(255),
+    genre VARCHAR(255),
+    poster_url VARCHAR(2048),
+    description TEXT,
+    release_date DATE,
+    is3D BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE room (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    capacity INT NOT NULL CHECK (capacity > 0),
+    is3D BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE seat (
+    id BIGSERIAL PRIMARY KEY,
+    room_id BIGINT NOT NULL,
+    row_char VARCHAR(1) NOT NULL,
+    number INT NOT NULL,
+    is_vip BOOLEAN NOT NULL DEFAULT FALSE,
+    is_accessible BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT uq_seat_in_room UNIQUE (room_id, row_char, number),
+    CONSTRAINT fk_seat_room FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
+);
+
+CREATE TABLE show (
+    id BIGSERIAL PRIMARY KEY,
+    film_id BIGINT NOT NULL,
+    room_id BIGINT NOT NULL,
+    start_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    price_base DECIMAL(10, 2) NOT NULL CHECK (price_base >= 0),
+    CONSTRAINT fk_show_film FOREIGN KEY (film_id) REFERENCES film(id) ON DELETE CASCADE,
+    CONSTRAINT fk_show_room FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ticket (
+    id BIGSERIAL PRIMARY KEY,
+    show_id BIGINT NOT NULL,
+    user_id BIGINT,
+    seat_id BIGINT,
+    date_of_buy TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    final_price DECIMAL(10, 2) NOT NULL CHECK (final_price >= 0),
+    status VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_ticket_show FOREIGN KEY (show_id) REFERENCES show(id) ON DELETE CASCADE,
+    CONSTRAINT fk_ticket_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    CONSTRAINT fk_ticket_seat FOREIGN KEY (seat_id) REFERENCES seat(id) ON DELETE SET NULL,
+    CONSTRAINT uq_ticket_for_show_seat UNIQUE (show_id, seat_id)
+);
+
+CREATE TABLE show_seat (
+    id BIGSERIAL PRIMARY KEY,
+    show_id BIGINT NOT NULL,
+    seat_id BIGINT NOT NULL,
+    is_occupied BOOLEAN NOT NULL DEFAULT FALSE,
+    ticket_id BIGINT UNIQUE, -- UNIKALNY,
+    CONSTRAINT uq_show_seat_pair UNIQUE (show_id, seat_id),
+    CONSTRAINT fk_show_seat_show FOREIGN KEY (show_id) REFERENCES show(id) ON DELETE CASCADE,
+    CONSTRAINT fk_show_seat_seat FOREIGN KEY (seat_id) REFERENCES seat(id) ON DELETE CASCADE,
+    CONSTRAINT fk_show_seat_ticket FOREIGN KEY (ticket_id) REFERENCES ticket(id) ON DELETE SET NULL,
+    CONSTRAINT chk_occupied_with_ticket CHECK (
+        (is_occupied = TRUE AND ticket_id IS NOT NULL) OR
+        (is_occupied = FALSE AND ticket_id IS NULL)
+    )
+);
