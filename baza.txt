@@ -69,7 +69,7 @@ CREATE TABLE show_seat (
     show_id BIGINT NOT NULL,
     seat_id BIGINT NOT NULL,
     is_occupied BOOLEAN NOT NULL DEFAULT FALSE,
-    ticket_id BIGINT UNIQUE, -- UNIKALNY,
+    ticket_id BIGINT UNIQUE,
     CONSTRAINT uq_show_seat_pair UNIQUE (show_id, seat_id),
     CONSTRAINT fk_show_seat_show FOREIGN KEY (show_id) REFERENCES show(id) ON DELETE CASCADE,
     CONSTRAINT fk_show_seat_seat FOREIGN KEY (seat_id) REFERENCES seat(id) ON DELETE CASCADE,
