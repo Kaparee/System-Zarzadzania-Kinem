@@ -5,16 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "seat")
 public class Seat {
-    //CREATE TABLE seat (
-    //    id BIGSERIAL PRIMARY KEY,
-    //    room_id BIGINT NOT NULL,
-    //    row_char VARCHAR(1) NOT NULL,
-    //    number INT NOT NULL,
-    //    is_vip BOOLEAN NOT NULL DEFAULT FALSE,
-    //    is_accessible BOOLEAN NOT NULL DEFAULT FALSE,
-    //    CONSTRAINT uq_seat_in_room UNIQUE (room_id, row_char, number),
-    //    CONSTRAINT fk_seat_room FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
-    //);
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

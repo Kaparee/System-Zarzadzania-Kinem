@@ -6,17 +6,6 @@ import java.sql.Date;
 @Entity
 @Table(name = "film")
 public class Film {
-//CREATE TABLE film (
-//    id BIGSERIAL PRIMARY KEY,
-//    title VARCHAR(255) NOT NULL,
-//    duration_minutes INT NOT NULL CHECK (duration_minutes > 0),
-//    director VARCHAR(255),
-//    genre VARCHAR(255),
-//    poster_url VARCHAR(2048),
-//    description TEXT,
-//    release_date DATE,
-//    is3D BOOLEAN NOT NULL DEFAULT FALSE
-//);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

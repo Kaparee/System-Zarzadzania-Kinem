@@ -7,15 +7,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "show")
 public class Show {
-//CREATE TABLE show (
-//    id BIGSERIAL PRIMARY KEY,
-//    film_id BIGINT NOT NULL,
-//    room_id BIGINT NOT NULL,
-//    start_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-//    price_base DECIMAL(10, 2) NOT NULL CHECK (price_base >= 0),
-//    CONSTRAINT fk_show_film FOREIGN KEY (film_id) REFERENCES film(id) ON DELETE CASCADE,
-//    CONSTRAINT fk_show_room FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
-//);
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

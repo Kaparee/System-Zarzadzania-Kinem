@@ -5,12 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "room")
 public class Room {
-    //CREATE TABLE room (
-    //    id BIGSERIAL PRIMARY KEY,
-    //    name VARCHAR(255) NOT NULL UNIQUE,
-    //    capacity INT NOT NULL CHECK (capacity > 0),
-    //    is3D BOOLEAN NOT NULL DEFAULT FALSE
-    //);
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

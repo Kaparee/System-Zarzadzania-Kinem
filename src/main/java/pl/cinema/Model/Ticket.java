@@ -7,20 +7,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ticket")
 public class Ticket {
-    //CREATE TABLE ticket (
-    //    id BIGSERIAL PRIMARY KEY,
-    //    show_id BIGINT NOT NULL,
-    //    user_id BIGINT,
-    //    seat_id BIGINT,
-    //    date_of_buy TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-    //    final_price DECIMAL(10, 2) NOT NULL CHECK (final_price >= 0),
-    //    status VARCHAR(50) NOT NULL,
-    //    CONSTRAINT fk_ticket_show FOREIGN KEY (show_id) REFERENCES show(id) ON DELETE CASCADE,
-    //    CONSTRAINT fk_ticket_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
-    //    CONSTRAINT fk_ticket_seat FOREIGN KEY (seat_id) REFERENCES seat(id) ON DELETE SET NULL,
-    //    CONSTRAINT uq_ticket_for_show_seat UNIQUE (show_id, seat_id)
-    //);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

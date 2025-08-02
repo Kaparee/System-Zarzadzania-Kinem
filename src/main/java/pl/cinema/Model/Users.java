@@ -6,18 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class Users {
-    //CREATE TABLE users (
-    //    id BIGSERIAL PRIMARY KEY,
-    //    username VARCHAR(255) UNIQUE NOT NULL,
-    //    password_hash VARCHAR(255) NOT NULL,
-    //    email VARCHAR(255) UNIQUE NOT NULL,
-    //    phone_number VARCHAR(20),
-    //    first_name VARCHAR(255),
-    //    last_name VARCHAR(255),
-    //    idAdmin boolean DEFAULT FALSE NOT NULL,
-    //    registration_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
-    //);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -39,7 +27,7 @@ public class Users {
     private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "isAdmin", nullable = false)
     private boolean isAdmin;
@@ -95,12 +83,12 @@ public class Users {
         this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isAdmin() {
