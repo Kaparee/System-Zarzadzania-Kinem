@@ -2,9 +2,13 @@ package pl.cinema.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import pl.cinema.Util.ServiceInjector;
 
 public class LoginController extends BaseController{
@@ -14,6 +18,8 @@ public class LoginController extends BaseController{
     private PasswordField passwordField;
     @FXML
     private Label infoLabel;
+    @FXML
+    private Button loginButton, registerButton;
 
     @FXML
     private void initialize() {
@@ -34,7 +40,18 @@ public class LoginController extends BaseController{
     }
 
     @FXML
-    public void onRegisterButtonClicked(){
+    public void onRegisterButtonClicked(javafx.event.ActionEvent event){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/cinema/register-view.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            RegisterController registerController = fxmlLoader.getController();
+            ServiceInjector.injectAllServices(registerController);
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

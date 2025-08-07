@@ -9,19 +9,18 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cinema.Controller.LoginController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cinema.Controller.LoginController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <Label text="Nazwa użytkownika lub Email" />
+            <Label text="Username or Email" />
             <TextField fx:id="usernameField" />
-            <Label text="Hasło" />
+            <Label text="Passowrd" />
             <PasswordField fx:id="passwordField" />
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClicked" text="Zaloguj się" />
-                  <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterButtonClicked" text="Zajerestruj się" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClicked" text="Login" />
+                  <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterButtonClicked" text="Register" />
                </children>
             </HBox>
             <Label fx:id="infoLabel" text="placeholder" />
@@ -29,6 +28,9 @@
          <StackPane.margin>
             <Insets left="150.0" right="150.0" />
          </StackPane.margin>
+         <padding>
+            <Insets left="100.0" right="100.0" />
+         </padding>
       </VBox>
    </children>
 </StackPane>

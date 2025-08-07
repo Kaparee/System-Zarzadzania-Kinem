@@ -13,16 +13,6 @@ import java.util.List;
 
 public class UsersService implements IUsersService {
 
-    public List<Users> getAllUsers(){
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            String hql = "SELECT u FROM Users u";
-            Query<Users> query = session.createQuery(hql, Users.class);
-            return query.list();
-        } catch (HibernateException he){
-            return null;
-        }
-    }
-
     public void createNewUser(String username, String password, String email, String phoneNumber, String firstName, String lastName){
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
