@@ -58,24 +58,41 @@ public class RegisterController extends BaseController{
         surnameField.setText(null);
     }
 
-    public boolean validateAll(){
-        if (!isValidUsername(usernameField.getText().trim())){
-            return false;
+    public boolean validateAll() {
+        boolean isValid = true;
+        resetStyles();
+        String username = usernameField.getText().trim();
+        if (!isValidUsername(username) || usersService.isUsernameTaken(username)) {
+            usernameField.setStyle("-fx-background-color: red");
+            isValid = false;
         }
-        if (!isValidPassword(passwordField.getText().trim())){
-            return false;
+        String password = passwordField.getText().trim();
+        if (!isValidPassword(password)) {
+            passwordField.setStyle("-fx-background-color: red");
+            isValid = false;
         }
-        if (!isValidEmail(emailField.getText().trim())){
-            return false;
+        String email = emailField.getText().trim();
+        if (!isValidEmail(email) || usersService.isEmailTaken(email)) {
+            emailField.setStyle("-fx-background-color: red");
+            isValid = false;
         }
-        if (!isValidPhone(phoneField.getText().trim())){
-            return false;
+        String phone = phoneField.getText().trim();
+        if (!isValidPhone(phone) || usersService.isPhoneTaken(phone)) {
+            phoneField.setStyle("-fx-background-color: red");
+            isValid = false;
         }
-        return true;
+        return isValid;
+    }
+
+    private void resetStyles() {
+        usernameField.setStyle("");
+        passwordField.setStyle("");
+        emailField.setStyle("");
+        phoneField.setStyle("");
     }
 
     public boolean isValidUsername(String username){
-        return username.length() >= 3;
+        return !username.contains("@") && username.length() >= 3;
     }
 
     public boolean isValidPassword(String password){

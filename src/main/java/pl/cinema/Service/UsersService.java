@@ -31,4 +31,43 @@ public class UsersService implements IUsersService {
             System.out.println("Wystąpił błąd podczas tworzenia konta");
         }
     }
+
+    public boolean isUsernameTaken(String username){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            String hql = "SELECT COUNT(u) FROM Users u WHERE u.username = :username";
+            Query<Long> query = session.createQuery(hql, Long.class);
+            query.setParameter("username", username);
+            Long result = query.uniqueResult();
+            return result > 0;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isEmailTaken(String email){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            String hql = "SELECT COUNT(u) FROM Users u WHERE u.email = :email";
+            Query<Long> query = session.createQuery(hql, Long.class);
+            query.setParameter("email", email);
+            Long result = query.uniqueResult();
+            return result > 0;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isPhoneTaken(String phone){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            String hql = "SELECT COUNT(u) FROM Users u WHERE u.phoneNumber = :phone";
+            Query<Long> query = session.createQuery(hql, Long.class);
+            query.setParameter("phone", phone);
+            Long result = query.uniqueResult();
+            return result > 0;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

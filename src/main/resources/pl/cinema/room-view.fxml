@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.cinema.Controller.RoomController">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="10.0">
+            <Label style="-fx-font-size: 18;" text="Ekran" />
+            <VBox fx:id="seatsContainer" alignment="CENTER" spacing="10" />
+                <Separator prefWidth="200.0" />
+            <VBox fx:id="ticketContainer" alignment="CENTER" spacing="10" />
+        </VBox>
+    </children>
+
+</StackPane>

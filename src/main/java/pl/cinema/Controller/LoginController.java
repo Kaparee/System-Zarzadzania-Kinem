@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pl.cinema.Model.Users;
 import pl.cinema.Util.ServiceInjector;
 
 public class LoginController extends BaseController{
@@ -28,15 +29,22 @@ public class LoginController extends BaseController{
 
     @FXML
     public void onLoginButtonClicked(){
-        String login = usernameField.getText().toLowerCase();
+        String login = usernameField.getText();
         String password = passwordField.getText();
 
-        int result = loginService.verifyLogin(login, password);
-        switch (result){
-            case 1 -> infoLabel.setText("Nazwa użytkownika: "+login +"\npassword: "+password+"\nUżytkownik");
-            case 2 -> infoLabel.setText("Nazwa użytkownika: "+login +"\npassword: "+password+"\nAdmin");
-            default -> infoLabel.setText("Błąd logowania"+result + " " +login + " "+password);
+        Users user = loginService.verifyLogin(login, password);
+        String role;
+        if (user != null){
+            if (user.isAdmin()){
+                role = "admin";
+            } else {
+                role = "user";
+            }
+            infoLabel.setText("Welcome " + user.getUsername()+"!\nYour email: " + user.getEmail()+"\nYour number: " + user.getPhoneNumber()+"\nYour name and surname: "+user.getFirstName() + " " + user.getLastName()+"\nYour role: "+role);
+        } else {
+            infoLabel.setText("Wrong login or password");
         }
+
     }
 
     @FXML
