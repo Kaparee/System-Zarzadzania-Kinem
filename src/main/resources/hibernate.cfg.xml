@@ -17,7 +17,7 @@
         <mapping class="pl.cinema.Model.Show"/>
         <mapping class="pl.cinema.Model.ShowSeat"/>
         <mapping class="pl.cinema.Model.Ticket"/>
-        <mapping class="pl.cinema.Model.Users"/>
+        <mapping class="pl.cinema.Model.User"/>
 
 
     </session-factory>

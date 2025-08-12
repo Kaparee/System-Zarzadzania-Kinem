@@ -21,6 +21,7 @@
                <children>
                   <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClicked" text="Login" />
                   <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterButtonClicked" text="Register" />
+                  <Button fx:id="returnButton" text="Return" onAction="#onReturnButtonClicked"/>
                </children>
             </HBox>
             <Label fx:id="infoLabel" text="placeholder" />

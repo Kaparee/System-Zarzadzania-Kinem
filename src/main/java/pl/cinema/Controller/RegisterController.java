@@ -111,7 +111,7 @@ public class RegisterController extends BaseController{
     }
 
     public void onReturnButtonClicked(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/cinema/login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/cinema/fxml/login-view.fxml"));
         try {
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) returnButton.getScene().getWindow();

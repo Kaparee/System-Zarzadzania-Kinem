@@ -1,7 +1,7 @@
 package pl.cinema.Service;
 
-import pl.cinema.Model.Users;
+import pl.cinema.Model.User;
 
 public interface ILoginService {
-    Users verifyLogin(String login, String password);
+    User verifyLogin(String login, String password);
 }

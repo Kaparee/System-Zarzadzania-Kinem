@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -107,6 +107,6 @@ public class Users {
         this.registrationDate = registrationDate;
     }
 
-    public Users() {
+    public User() {
     }
 }

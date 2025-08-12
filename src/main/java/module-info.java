@@ -6,8 +6,9 @@ module pl.cinema {
         requires java.sql;
         requires bcrypt;
         requires java.persistence;
+    requires net.bytebuddy;
 
-        opens pl.cinema to javafx.fxml, org.hibernate.orm.core;
+    opens pl.cinema to javafx.fxml, org.hibernate.orm.core;
         exports pl.cinema;
         exports pl.cinema.Model;
         opens pl.cinema.Model to javafx.fxml, org.hibernate.orm.core;

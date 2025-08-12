@@ -1,14 +1,20 @@
 package pl.cinema.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import pl.cinema.Model.Seat;
 import pl.cinema.Util.ServiceInjector;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class RoomController extends BaseController{
@@ -16,14 +22,32 @@ public class RoomController extends BaseController{
     private VBox seatsContainer;
     @FXML
     private VBox ticketContainer;
+    @FXML
+    private Button returnButton;
+
+    private Long id;
+    private LocalDate selectedDate;
 
     @FXML
     public void initialize() {
         ServiceInjector.injectAllServices(this);
+    }
 
-        List<String> rows = roomService.getRows(1L);
-        List<Long> seats = roomService.getSeats(1L);
-        List<Boolean> isVip = seatService.isVip(1L);
+    public void initData(Long id, LocalDate selectedDate){
+        this.id = id;
+        this.selectedDate = selectedDate;
+        loadSeats();
+    }
+
+    public void loadSeats(){
+        if (id == null) {
+            System.err.println("ERROR: Wrong room id");
+            return;
+        }
+        seatsContainer.getChildren().clear();
+        List<String> rows = roomService.getRows(id);
+        List<Long> seats = roomService.getSeats(id);
+        List<Boolean> isVip = seatService.isVip(id);
         int seatIndex = 0;
         for (int r = 0; r < rows.size(); r++) {
             String rowName = rows.get(r);
@@ -33,7 +57,7 @@ public class RoomController extends BaseController{
             for (int c = 0; c < seats.get(r); c++) {
                 Button seat = new Button(rowName + (c + 1));
                 Integer seatNumber = c + 1;
-                Seat seatInfo = seatService.getSeatInfo(1L, rowName, seatNumber);
+                Seat seatInfo = seatService.getSeatInfo(id, rowName, seatNumber);
 
                 seat.setPrefSize(40, 40);
                 boolean vipStatus = isVip.get(seatIndex);
@@ -125,6 +149,19 @@ public class RoomController extends BaseController{
                 ticketContainer.getChildren().remove(node);
                 break;
             }
+        }
+    }
+
+    @FXML
+    public void onReturnButtonClicked(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/cinema/fxml/main-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

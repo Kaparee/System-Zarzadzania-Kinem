@@ -1,10 +1,7 @@
 package pl.cinema.Util;
 
 import pl.cinema.Controller.BaseController;
-import pl.cinema.Service.LoginService;
-import pl.cinema.Service.RoomService;
-import pl.cinema.Service.SeatService;
-import pl.cinema.Service.UsersService;
+import pl.cinema.Service.*;
 
 public class ServiceInjector {
     public static void injectAllServices(BaseController controller){
@@ -12,5 +9,6 @@ public class ServiceInjector {
         controller.setLoginService(new LoginService());
         controller.setRoomService(new RoomService());
         controller.setSeatService(new SeatService());
+        controller.setShowService(new ShowService());
     }
 }
